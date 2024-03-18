@@ -104,10 +104,11 @@
           document.getElementById("titikkoordinat").textContent = "Latitude: " + latitude + ", Longitude: " + longitude;
 
           // Tentukan biaya berdasarkan lokasi
-          if (latitude == -8.5887372 && longitude == 116.0378246) {
-            totalBayar = 12000;
+          var mataramBoundary = L.latLngBounds([-8.6085, 116.0264], [-8.5147, 116.1881]);
+          if (mataramBoundary.contains(e.latlng)) {
+            totalBayar = 8000; // Mataram
           } else {
-            totalBayar = 8000;
+            totalBayar = 12000; // Luar Mataram
           }
           document.getElementById("bayar").textContent = "Total Bayar: Rp " + totalBayar.toLocaleString();
         }
@@ -128,10 +129,11 @@
               document.getElementById("titikkoordinat").textContent = "Latitude: " + position.coords.latitude.toFixed(7) + ", Longitude: " + position.coords.longitude.toFixed(7);
 
               // Tentukan biaya berdasarkan lokasi
-              if (position.coords.latitude == -8.5887372 && position.coords.longitude == 116.0378246) {
-                totalBayar = 12000;
+              var mataramBoundary = L.latLngBounds([-8.6085, 116.0264], [-8.5147, 116.1881]);
+              if (mataramBoundary.contains(latlng)) {
+                totalBayar = 8000; // Mataram
               } else {
-                totalBayar = 8000;
+                totalBayar = 12000; // Luar Mataram
               }
               document.getElementById("bayar").textContent = "Total Bayar: Rp " + totalBayar.toLocaleString();
             },
