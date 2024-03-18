@@ -94,6 +94,20 @@
           attribution: 'Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(map);
 
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+          const R = 6371; // Radius of the earth in km
+          const dLat = deg2rad(lat2 - lat1);
+          const dLon = deg2rad(lon2 - lon1);
+          const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+          const distance = R * c; // Distance in km
+          return distance;
+        }
+
+        function deg2rad(deg) {
+          return deg * (Math.PI / 180);
+        }
+
         function onLocationFound(e) {
           if (marker) {
             map.removeLayer(marker);
@@ -103,8 +117,12 @@
           var longitude = e.latlng.lng.toFixed(7);
           document.getElementById("titikkoordinat").textContent = "Latitude: " + latitude + ", Longitude: " + longitude;
 
-          // Hitung biaya berdasarkan lokasi
-          if (latitude == -8.5876167 && longitude == 116.0753931) {
+          // Hitung jarak ke titik referensi
+          var distance = calculateDistance(latitude, longitude, -8.5887372, 116.0378246);
+
+          // Tentukan biaya berdasarkan jarak
+          if (distance <= 5) {
+            // Misalnya, dalam 5 km
             totalBayar = 8000;
           } else {
             totalBayar = 12000;
@@ -127,8 +145,12 @@
               marker = L.marker(latlng).addTo(map);
               document.getElementById("titikkoordinat").textContent = "Latitude: " + position.coords.latitude.toFixed(7) + ", Longitude: " + position.coords.longitude.toFixed(7);
 
-              // Hitung biaya berdasarkan lokasi
-              if (position.coords.latitude == -8.5876167 && position.coords.longitude == 116.0753931) {
+              // Hitung jarak ke titik referensi
+              var distance = calculateDistance(position.coords.latitude, position.coords.longitude, -8.5887372, 116.0378246);
+
+              // Tentukan biaya berdasarkan jarak
+              if (distance <= 5) {
+                // Misalnya, dalam 5 km
                 totalBayar = 8000;
               } else {
                 totalBayar = 12000;
