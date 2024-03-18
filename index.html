@@ -105,9 +105,9 @@
 
           // Tentukan biaya berdasarkan lokasi
           if (latitude == -8.5887372 && longitude == 116.0378246) {
-            totalBayar = 8000;
-          } else {
             totalBayar = 12000;
+          } else {
+            totalBayar = 8000;
           }
           document.getElementById("bayar").textContent = "Total Bayar: Rp " + totalBayar.toLocaleString();
         }
@@ -129,9 +129,9 @@
 
               // Tentukan biaya berdasarkan lokasi
               if (position.coords.latitude == -8.5887372 && position.coords.longitude == 116.0378246) {
-                totalBayar = 8000;
-              } else {
                 totalBayar = 12000;
+              } else {
+                totalBayar = 8000;
               }
               document.getElementById("bayar").textContent = "Total Bayar: Rp " + totalBayar.toLocaleString();
             },
