@@ -70,7 +70,11 @@
               <label class="form-check-label" for="exampleCheck1">Anda yakin pesanan sudah benar ?</label>
               <p class="mt-2" style="color: gray; font-size: 14px"><b>Catatan : Khusus untuk daerah sekitar Mataram Rp 8.000</b></p>
             </div>
-            <button type="submit" class="btn btn-primary">Pesan Sekarang</button>
+            <div class="bayar">
+              <button type="submit" class="btn btn-primary mt-3">Pesan Sekarang</button>
+              <h4 class="mt-3"><b>Total Bayar</b></h4>
+              <p id="bayar"></p>
+            </div>
           </form>
         </div>
       </div>
@@ -83,6 +87,7 @@
       document.addEventListener("DOMContentLoaded", function () {
         var map = L.map("mapid").setView([-8.5831, 116.116], 13); // Set initial location to Mataram, NTB, Indonesia
         var marker;
+        var totalBayar = 0;
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 19,
@@ -94,7 +99,17 @@
             map.removeLayer(marker);
           }
           marker = L.marker(e.latlng).addTo(map);
-          document.getElementById("titikkoordinat").textContent = "Latitude: " + e.latlng.lat.toFixed(6) + ", Longitude: " + e.latlng.lng.toFixed(6);
+          var latitude = e.latlng.lat.toFixed(7);
+          var longitude = e.latlng.lng.toFixed(7);
+          document.getElementById("titikkoordinat").textContent = "Latitude: " + latitude + ", Longitude: " + longitude;
+
+          // Hitung biaya berdasarkan lokasi
+          if (latitude == -8.5876167 && longitude == 116.0753931) {
+            totalBayar = 8000;
+          } else {
+            totalBayar = 12000;
+          }
+          document.getElementById("bayar").textContent = "Total Bayar: Rp " + totalBayar.toLocaleString();
         }
 
         function onLocationError(e) {
@@ -110,7 +125,15 @@
                 map.removeLayer(marker);
               }
               marker = L.marker(latlng).addTo(map);
-              document.getElementById("titikkoordinat").textContent = "Latitude: " + position.coords.latitude.toFixed(6) + ", Longitude: " + position.coords.longitude.toFixed(6);
+              document.getElementById("titikkoordinat").textContent = "Latitude: " + position.coords.latitude.toFixed(7) + ", Longitude: " + position.coords.longitude.toFixed(7);
+
+              // Hitung biaya berdasarkan lokasi
+              if (position.coords.latitude == -8.5876167 && position.coords.longitude == 116.0753931) {
+                totalBayar = 8000;
+              } else {
+                totalBayar = 12000;
+              }
+              document.getElementById("bayar").textContent = "Total Bayar: Rp " + totalBayar.toLocaleString();
             },
             function (error) {
               alert("Tidak dapat menemukan lokasi: " + error.message);
