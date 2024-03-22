@@ -6,6 +6,7 @@ document.getElementById("layananSelect").addEventListener("change", function () 
     window.location.href = "food-delivery.html";
   } else if (selectedOption === "kurir") {
     window.location.href = "kurir.html";
+  } else if (selectedOption === "homecare") {
+    window.location.href = "homecare.html";
   }
-  // Add more conditions for other options if needed
 });
