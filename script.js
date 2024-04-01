@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Tentukan biaya berdasarkan lokasi
     var mataramBoundary = L.latLngBounds([-8.6085, 116.0264], [-8.5147, 116.1881]);
     if (mataramBoundary.contains(e.latlng)) {
-      totalBayar = 8000; // Mataram
+      totalBayar = 5000; // Mataram
     } else {
       totalBayar = 12000; // Luar Mataram
     }
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Tentukan biaya berdasarkan lokasi
         var mataramBoundary = L.latLngBounds([-8.6085, 116.0264], [-8.5147, 116.1881]);
         if (mataramBoundary.contains(latlng)) {
-          totalBayar = 8000; // Mataram
+          totalBayar = 5000; // Mataram
         } else {
           totalBayar = 12000; // Luar Mataram
         }
